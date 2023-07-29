@@ -1,5 +1,7 @@
-import React from 'react';
+import React from "react";
 import { useState } from 'react';
+
+import { Stepper, Step, Button } from "@material-tailwind/react";
 
 const steps = [
   {
@@ -131,7 +133,32 @@ const AddEmployees = () => {
 
   return (
     <div>
+      {/* Stepper component */}
+      <Stepper
+        activeStep={currentStep}
+        isLastStep={(value) => setCurrentStep(steps.length - 1)}
+        isFirstStep={(value) => setCurrentStep(0)}
+      >
+        {/* Render the steps */}
+        {steps.map((step, index) => (
+          <Step key={index} onClick={() => setCurrentStep(index)}>
+            {index + 1}
+          </Step>
+        ))}
+      </Stepper>
+
+      {/* Render the form for the current step */}
       {renderStep(currentStep)}
+
+      {/* Navigation buttons */}
+      <div className="mt-16 flex justify-between">
+        <Button onClick={handlePrevStep} disabled={currentStep === 0}>
+          Previous
+        </Button>
+        <Button onClick={handleNextStep} disabled={currentStep === steps.length - 1}>
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
