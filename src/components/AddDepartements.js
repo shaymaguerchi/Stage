@@ -6,72 +6,44 @@ const steps = [
   {
     title: "Personal Information",
     fields: [
-      { name: "photo", label: "Photo", type: "file" },
       { name: "name", label: "Name", type: "text" },
-      { name: "gender", label: "Gender", type: "text" },
-      { name: "dateOfBirth", label: "Date of Birth", type: "date" },
-      { name: "identificationNumber", label: "Identification Number", type: "text" },
+      { name: "manager", label: "Manager", type: "text" },
+      { name: "nbemployees", label: "Number of employees", type: "number" },
+      
     ],
   },
   {
     title: "Contact Information",
     fields: [
-      { name: "address", label: "Address", type: "text" },
+    
       { name: "email", label: "Email", type: "email" },
       { name: "phone", label: "Phone", type: "tel" },
     ],
   },
   {
-    title: "Employment Details",
+    title: "Description and Purpose",
     fields: [
-      { name: "manager", label: "Manager", type: "text" },
-      { name: "department", label: "Department", type: "text" },
-      { name: "jobTitle", label: "Job Title", type: "text" },
-      { name: "startDate", label: "Start Date", type: "date" },
-      { name: "status", label: "Status", type: "text" },
+      { name: "description", label: "Brief Description of the Departement", type: "textarea" },
+      { name: "department's purpose", label: "Department's Purpose or Mission Statement", type: "textarea" },
     ],
   },
   {
-    title: "Compensation and Benefits",
+    title: "List of employees",
     fields: [
-      { name: "salaryOrHourlyRate", label: "Salary or Hourly Rate", type: "number" },
-      { name: "payFrequency", label: "Pay Frequency", type: "text" },
-      { name: "bankAccountDetails", label: "Bank Account Details", type: "text" },
+       { name: "photo", label: "Photo", type: "file" },
+      { name: "name", label: "Name", type: "text" },
+      { name:"email", label:" Email" , type:"text"},
+      { name: "job title", label:"Job Title" , type:"text"},
+      { name: "status", label :"Status" , type:"text"},
+      
     ],
   },
-  {
-    title: "Emergency Contacts",
-    fields: [
-      { name: "emergencyContactName", label: "Name", type: "text" },
-      { name: "relationship", label: "Relationship", type: "text" },
-      { name: "emergencyContactPhone", label: "Phone", type: "tel" },
-    ],
-  },
-  {
-    title: "Education and Qualifications",
-    fields: [
-      { name: "highestEducationLevel", label: "Highest Level of Education", type: "text" },
-      { name: "degreesOrCertifications", label: "Degrees or Certifications Earned", type: "text" },
-      { name: "professionalLicenses", label: "Professional Licenses or Designations", type: "text" },
-    ],
-  },
-  {
-    title: "Skills and Experience",
-    fields: [
-      { name: "workExperience", label: "Relevant Work Experience", type: "text" },
-      { name: "keySkills", label: "Key Skills or Competencies", type: "text" },
-    ],
-  },
-  {
-    title: "Time Off and Leave",
-    fields: [
-      { name: "vacationLeaveBalance", label: "Vacation Leave Balance", type: "number" },
-      { name: "sickLeaveBalance", label: "Sick Leave Balance", type: "number" },
-    ],
-  },
+
+
+  
 ];
 
-const AddEmployees = () => {
+const AddDepartements = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [isCompleted, setIsCompleted] = useState(false);
@@ -103,7 +75,7 @@ const AddEmployees = () => {
       return (
         <div>
           <h1 className="text-2xl font-semibold mb-4">Congratulations!</h1>
-          <p className="mb-4">The account has been created successfully.</p>
+          <p className="mb-4">The Department has been created successfully.</p>
         </div>
       );
     }
@@ -125,7 +97,15 @@ const AddEmployees = () => {
                     onChange={handleFileInputChange}
                   />
                 </label>
-              ) : (
+              ): field.type === 'textarea' ? (
+                <textarea
+                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  name={field.name}
+                  value={formData[field.name] || ''}
+                  onChange={handleInputChange}
+                  placeholder={`Enter your ${field.label}`}
+                />
+              )  : (
                 <input
                   type={field.type}
                   className="w-full px-1  border border-gray-300 rounded focus:outline-none focus:border-blue-500 ml-4"
@@ -181,6 +161,6 @@ const AddEmployees = () => {
   );
 };
 
-export default AddEmployees;
+export default AddDepartements;
  
 

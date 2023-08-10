@@ -10,7 +10,7 @@ const Sidebar = () => {
   };
 
   const Menus = [
-    { title: 'Dashboard', src: 'Chart_fill' },
+    { title: 'Home', src: 'Chart_fill' },
     { title: 'Employees', src: 'User', gap: true },
     { title: 'Departments', src: 'Folder' },
     {
@@ -44,17 +44,16 @@ const Sidebar = () => {
             className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
             ${Menu.gap ? 'mt-9' : 'mt-2'} ${index === 0 && 'bg-light-white'}`}
           >
-            <img src={`${Menu.src}.png`} alt={Menu.title} />
-            <span
-              className={`${!open && 'hidden'} origin-left duration-200`}
+            <MenuItem
+              to={Menu.title === 'Dashboard' ? '/' : `/${Menu.title.toLowerCase()}`}
+              src={`${Menu.src}.png`}
+              title={Menu.title}
               onClick={() => {
                 if (Menu.subMenu) {
                   toggleSubMenu();
                 }
               }}
-            >
-              {Menu.title}
-            </span>
+            />
           </li>
         ))}
         {showSubMenu && Menus[3].subMenu && (
@@ -64,8 +63,20 @@ const Sidebar = () => {
                 key={index}
                 className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 mt-2"
               >
-                <img src={`${subMenuItem.src}.png`} alt={subMenuItem.title} />
-                <span>{subMenuItem.title}</span>
+                {subMenuItem.title === 'Job Title' && (
+                  <MenuItem
+                    to={`/addjobtitle`}
+                    src={`${subMenuItem.src}.png`}
+                    title={subMenuItem.title}
+                  />
+                )}
+                {subMenuItem.title === 'Employment Status' && (
+                  <MenuItem
+                    to={`/addEmpstatus`}
+                    src={`${subMenuItem.src}.png`}
+                    title={subMenuItem.title}
+                  />
+                )}
               </li>
             ))}
           </ul>

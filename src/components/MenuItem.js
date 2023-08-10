@@ -1,18 +1,11 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const MenuItem = ({ menu, open, isFirst }) => {
-  const { title, src, gap } = menu;
-
-  return (
-    <li
-      className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${
-        gap ? "mt-9" : "mt-2"
-      } ${isFirst && "bg-light-white"}`}
-    >
-      <img src="Chill_fill.png" />
-      <span className={open ? "origin-left duration-200" : "hidden origin-left duration-200"}>{title}</span>
-    </li>
-  );
-};
+const MenuItem = ({ to, src, title, onClick }) => (
+  <Link to={to} className="flex items-center" onClick={onClick}>
+    <img src={src} alt={title} className="mr-2" />
+    <span>{title}</span>
+  </Link>
+);
 
 export default MenuItem;
